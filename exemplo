@@ -1,0 +1,37 @@
+interface SuperHeroi {
+    nome: string;
+    superPoderes: string[];
+    raca: string;
+    antiHeroi: boolean;
+    podeVoar:()  =>  boolean;
+}
+
+class SuperHeroiHumano implements SuperHeroi{
+    public nome string;
+    public superPoderes: string[];
+    public raca: "humano";
+    public antiHeroi: boolean;
+
+    constructor(nome: string, superPoderes: string[], antiHeroi: boolean){
+        this.nome=nome;
+        this.superPoderes=superPoderes;
+        this.antiHeroi=antiHeroi;
+
+    }
+
+    public podeVoar(){
+        const heroiPodeVoar = this.superPoderes.includes("voar")
+        return heroiPodeVoar;
+
+    }
+
+}
+
+const primeiroSuperHeroi = new SuperHeroiHumano("kmj", ["teia", "superforca"], true);
+const podeVoar = primeiroSuperHeroi.podeVoar();
+console.log("primeiro heroi pode voar?", podeVoar)
+
+
+const segundoSuperHeroi = new SuperHeroiHumano("yjm", ["superforca", "voar"], false);
+const segundoHeroiPodeVoar=segundoSuperHeroi.podeVoar();
+console.log("segundo heroi pode voar?", segundoHeroiPodeVoar);
