@@ -1,0 +1,66 @@
+class Veiculo{
+    protected placa: String;
+    protected modelo: String;
+    protected ano: Number;
+    protected valorDiaria: Number;
+
+
+    constructor(placa: String, modelo: String, ano: Number, valorDiaria: Number){
+        this.placa = placa
+        this.modelo=modelo
+        this.ano = ano
+        this.valorDiaria = valorDiaria
+    
+
+    }
+
+    infoVeiculo(): String{
+        return `Placa ${this.placa}, modelo: ${this.modelo}, ano: ${this.modelo}, valorDiaria: ${this.valorDiaria}`
+    }
+}
+
+interface Aluguel{
+    calcularAluguel: (dias: number) => Number
+}
+
+class Carro extends Veiculo implements Aluguel{
+    public qtdPassageiros: number = 5
+    constructor(placa: String, modelo: String, ano: Number, valorDiaria: Number, qtdPassageiros: Number){
+    super(placa, modelo, ano,valorDiaria)
+    this.qtdPassageiros= qtdPassageiros
+
+    }
+
+    calcularAluguel(dias: Number): Number{
+        const aluguel = this.valorDiaria * dias
+        return aluguel
+
+    }
+
+}
+
+class Caminhao extends Veiculo implements Aluguel{
+    public taxTonelada: number
+
+    constructor(placa: String, modelo: String, ano: Number, valorDiaria: Number, taxTonelada: Number){
+    super(placa, modelo, ano,valorDiaria)
+    this.taxTonelada= taxTonelada
+
+    }
+    calcularAluguel(dias: Number, toneladas: Number=0): Number{
+    const aluguel = (dias * this.valorDiaria) + (toneladas * this.taxTonelada)
+    return aluguel
+    
+
+    }
+
+}
+
+const carro1 = new Carro("abc-123", "fusca", 1960, 80, 5);
+const valorAluguelCarro1=carro1.calcularAluguel(5)
+console.log("valor aluguel carro 1:", valorAluguelCarro1)
+
+
+const caminhao1 = new Caminhao ("abc-133", "volvo", 1990, 1000, 50)
+const valorAluguelCaminhao1=caminhao1.calcularAluguel(5,10)
+console.log(valorAluguelCaminhao1)
